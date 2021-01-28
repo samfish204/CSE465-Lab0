@@ -8,7 +8,7 @@ First, [install docker](https://docs.docker.com/get-docker/) on your system.
 
 Then, in a terminal, type
 ```bash
-docker run -it ${PWD}:/root femianjc/cse465
+docker run -it -v ${PWD}:/root femianjc/cse465
 ```
 
 Then follow along in class, or type 'make' to test the code.

@@ -29,3 +29,7 @@ make check
 
 You should see "Success!" printed several times. 
 
+# Submitting Your Results
+
+Just put the URL of your repo in the canvas assignment to indicate that you have set htings up.
+

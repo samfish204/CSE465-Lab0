@@ -9,7 +9,7 @@ From _your_ host computer:
 ```
 docker create -it --name cse465 jfemiani/cse465
 ```
-#Start your machine
+# Start your machine
 ```
 docker start -at cse465
 ```

@@ -11,7 +11,7 @@ docker create -it --name cse465 jfemiani/cse465
 ```
 # Start your machine
 ```
-docker start -at cse465
+docker start -ai cse465
 ```
 
 # Testing Your Code

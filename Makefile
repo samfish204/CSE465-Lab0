@@ -70,7 +70,7 @@ FORCE: # no dependancies -- always dirty
 
 # C-Sharp
 %.exe: %.cs 
-	@csc -nologo $?
+	@mcs -nologo $?
 
 %.output:  %.exe FORCE
 	@(mono $*.exe >$*.output) || (cat $*.output; false)

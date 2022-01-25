@@ -12,7 +12,7 @@
 # Grading is only done after the sanity checks pass. 
 
 # Use:   
-#	make PROBLEMS=XXXX
+#	make xxxx.output to se the output of xxx (e.g 'make HelloWorldJava.output')
 # to test only one problem
 
 PROBLEMS = $(basename  $(wildcard *.expected))
@@ -34,10 +34,6 @@ default: all
 all: check
 
 check: $(RULES)
-
-run: $(OUTPUTS)
-
-expected: 
 
 clean:
 	@rm -f $(OUTPUTS)
@@ -62,15 +58,15 @@ FORCE: # no dependancies -- always dirty
 	@(python $*.py >$*.output) || (cat $*.output; false)
 
 # Java
-%.class: %.java
-	@javac $?
+HelloWorldJava.class: HelloWorldJava.java FORCE
+	@javac HelloWorldJava.java
 
 %.output: %.class FORCE
 	@(java $* >$*.output) || (cat $*.output; false)
 
 # C-Sharp
-%.exe: %.cs 
-	@mcs -nologo $?
+HelloWorldCSharp.exe: HelloWorldCSharp.cs FORCE
+	@mcs -nologo HelloWorldCSharp.cs
 
 %.output:  %.exe FORCE
 	@(mono $*.exe >$*.output) || (cat $*.output; false)
@@ -85,4 +81,24 @@ check-%: %.output
 	@[ -z '$(shell diff $*.output $*.expected)' ] || (echo "$*.output does not match $*.expected\n" && diff $*.output $*.expected && false)
 	@echo $* -- Success!
 
+submit: check
+	git add -u
+	git commit -am "Submitting"
+	git push origin master
+	@echo ""
+	git log -1
+	@echo ""
+	@echo "*** All tests seem to have passed. "
+	@echo "*** Copy and paste the output above and submit it to canvas."
+	@echo "*** Bear in mind that the tests must complete in under 5 minutes on the instructors machine." 
+	@echo "*** and make sure that the output is has the commit hash shown above." 
+	@echo ""
+
+update-http:
+	git pull https://gitlab.csi.miamioh.edu/CSE465/instructor/lab0.git
+
+update-ssh:
+	git pull git@gitlab.csi.miamioh.edu:CSE465/instructor/lab0.git
+
+update: update-http
 

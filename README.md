@@ -14,22 +14,29 @@ docker create -it --name cse465 jfemiani/cse465
 docker start -ai cse465
 ```
 
+#  Create an environment variable for your user
+```
+export SID=<Your student id>
+echo export SID=$SID >> ~/.bashrc
+```
+
 # Testing Your Code
 
-
-Fork https://gitlab.csi.miamioh.edu/CSE465/instructor/lab0.git into the group created for you at https://gitlab.csi.miamioh.edu/CSE465/yourid. 
-
-Then, in a terminal, type
+In a terminal, type
 ```bash
 docker start -at cse465
-git clone https://gitlab.csi.miamioh.edu/CSE465/yourid/lab0.git
+git clone https://gitlab.csi.miamioh.edu/CSE465/$SID/lab0.git
 cd lab0
-make check
+timeout 5m make check
 ```
+
 
 You should see "Success!" printed several times. 
 
 # Submitting Your Results
 
-Just put the URL of your repo in the canvas assignment to indicate that you have set htings up.
-
+Type 
+```
+timeout 5m make check && make submit
+```
+and paste the output into canvas.
